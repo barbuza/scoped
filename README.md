@@ -1,5 +1,5 @@
 # scoped
-easily add scopes to django models
+don't mess this Manager and QuerySet, easily add scopes to your django models
 
 ## usage
 
