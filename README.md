@@ -10,6 +10,7 @@ easily add scopes to django models
 
 ```python
 from django.db import models
+from scoped import ScopedModel
 
 class Article(ScopedModel):
     
