@@ -46,7 +46,7 @@ class ScopedBase(models.base.ModelBase):
 
     def __new__(cls, name, bases, dct):
         if name != "ScopedModel":
-            if bases[0] is ScopedModel:
+            if bases[0] is ScopedModel and "objects" not in dct:
                 dct.update(objects=ScopedManager())
         if "Scopes" not in dct:
             raise RuntimeError("%s must have Scopes declared" % name)

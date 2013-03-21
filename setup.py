@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="scoped",
-    version="0.1.0",
+    version="0.1.1",
     packages=["scoped", "scoped.tests"],
     install_requires=[
         "Django>=1.5",
