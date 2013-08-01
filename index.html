@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Scoped by barbuza</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Scoped</h1>
+        <p>easily add scopes to django models</p>
+
+        <p class="view"><a href="https://github.com/barbuza/scoped">View the Project on GitHub <small>barbuza/scoped</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/barbuza/scoped/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/barbuza/scoped/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/barbuza/scoped">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="scoped" class="anchor" href="#scoped"><span class="octicon octicon-link"></span></a>scoped</h1>
+
+<p>don't mess with Manager and QuerySet, easily add scopes to your django models</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>usage</h2>
+
+<h3>
+<a name="install-scoped" class="anchor" href="#install-scoped"><span class="octicon octicon-link"></span></a>install scoped:</h3>
+
+<p><code>pip install scoped</code> and add scoped to your <code>INSTALLED_APPS</code></p>
+
+<h3>
+<a name="add-scoped-to-your-models" class="anchor" href="#add-scoped-to-your-models"><span class="octicon octicon-link"></span></a>add scoped to your models</h3>
+
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">scoped</span> <span class="kn">import</span> <span class="n">ScopedModel</span>
+
+<span class="k">class</span> <span class="nc">Article</span><span class="p">(</span><span class="n">ScopedModel</span><span class="p">):</span>
+
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+    <span class="n">published</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">has_comments</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Scopes</span><span class="p">:</span>
+
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">published</span><span class="p">(</span><span class="n">qs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">qs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">drafts</span><span class="p">(</span><span class="n">qs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">qs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">with_comments</span><span class="p">(</span><span class="n">qs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">qs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">has_comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="use-your-scopes" class="anchor" href="#use-your-scopes"><span class="octicon octicon-link"></span></a>use your scopes</h3>
+
+<div class="highlight"><pre><span class="n">Article</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">()</span>
+
+<span class="n">Article</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">with_comments</span><span class="p">()</span><span class="o">.</span><span class="n">published</span><span class="p">()</span>
+</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/barbuza">barbuza</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
